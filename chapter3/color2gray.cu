@@ -1,3 +1,5 @@
+#include <iostream>
+
 constexpr int channels = 3; 
 constexpr int block_size = 16; 
 
@@ -23,16 +25,16 @@ void color2gray_kernel(unsigned char* in, unsigned char* out, int width, int hei
 
 void color2gray(unsigned char* in_h, unsigned char * out_h, int width, int height){
     int n = width * height;
-    int in_size = n * CHANNELS * sizeof(unsigned char); 
+    int in_size = n * channels * sizeof(unsigned char); 
     int out_size = n * sizeof(unsigned char); 
-    unsigned char *in_d, out_d; 
+    unsigned char *in_d, *out_d; 
 
     cudaMalloc((void **) &in_d, in_size);
     cudaMalloc((void **) &out_d, out_size);
 
     cudaMemcpy(in_d, in_h, in_size, cudaMemcpyHostToDevice); 
 
-    dim3 dimGrid((height + (block_size-1)) / block_size, (width + (block_size-1)) / block_size);
+    dim3 dimGrid((width + (block_size-1)) / block_size, (height + (block_size-1)) / block_size);
     dim3 dimBlock(block_size, block_size, 1);
     
     // Kernel invocation
@@ -42,4 +44,21 @@ void color2gray(unsigned char* in_h, unsigned char * out_h, int width, int heigh
 
     cudaFree(in_d);
     cudaFree(out_d);
+}
+
+int main(){
+    unsigned char input[] = {
+        255,   0,   0,   // red
+        0, 255,   0,   // green
+        0,   0, 255,   // blue
+        255, 255, 255    // white
+    };
+
+   unsigned char output[4];
+   color2gray(input, output, 2, 2);
+
+   for (unsigned char element : output) {
+        std::cout << static_cast<int>(element) << " ";
+   }
+   return 0;
 }
