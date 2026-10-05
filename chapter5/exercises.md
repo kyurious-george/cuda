@@ -30,7 +30,7 @@
 - c. 8
 - d. 8 
 - e. (128 + 1) / 4 = 516
-- f. 10 / 4 = 2.5 OPS/B
+- f. 7/(4*5) = 0.35
 
 **Q12**: 
 - a. No, limited by the amount of shared memory / SM
