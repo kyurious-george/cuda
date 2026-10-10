@@ -4,7 +4,6 @@ constexpr int blur_size = 1;
 constexpr int block_size = 16; 
 
 // The input image is encoded as unsigned chars [0, 255]
-// Each pixel is 3 consecutive chars for the 3 channels RGB
 __global__ 
 void blur_kernel(unsigned char* in, unsigned char* out, int width, int height){
     int col = blockDim.x * blockIdx.x + threadIdx.x; 

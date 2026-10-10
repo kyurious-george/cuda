@@ -2,8 +2,6 @@
 
 constexpr int block_size = 16; 
 
-// The input image is encoded as unsigned chars [0, 255]
-// Each pixel is 3 consecutive chars for the 3 channels RGB
 __global__ 
 void matmul_kernel(float* a, float* b, float* c, int width, int height){
     int col = blockDim.x * blockIdx.x + threadIdx.x; 
