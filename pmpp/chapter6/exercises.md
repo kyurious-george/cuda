@@ -9,11 +9,11 @@
 - h. N/A - shared memory does not need coalescing 
 - i. not coalesced
 
-**Q2**: See folder for code
+**Q2**: See folder for code - Corner Turning Mat Mul
 
 **Q3**: In order to completely avoid uncoalesced accesses to global memory, the `BLOCK_SIZE` should be multiples of 32 (aka 32 or 64 because more than that would likely go over bounds of shared memory)
 
-**Q4**: See folder for code
+**Q4**: See folder for code - Vector Addition with Vector Loads
 
 **Q5**:
 - a. 1 slot - 32 bank conflicts (all land on 0)
